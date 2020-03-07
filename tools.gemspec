@@ -6,8 +6,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["oselimi"]
   spec.email         = ["selimiosman94@gmail.com"]
 
-  spec.summary       = %q{Creating tools for create credit card}
-  spec.description   = %q{Creating tools for create credit card}
+  spec.summary       = %q{Creating tools for credit card}
+  spec.description   = %q{Creating tools for credit card}
   spec.homepage      = "https://www.github.com"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
