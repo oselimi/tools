@@ -1,18 +1,28 @@
-RSpec.describe Tools::Resistors do
-  let(:resistor) { Tools::Resistors}
-
-  it "resistor has number 7 output is color['violet]" do
-    expect(resistor.value(['violet'])).to eq(7)
-  end
-  it "resistors has number 10 output is ['brown','black']" do
-      expect(resistor.value(['brown','black'])).to eq(10)
-    end
-
-  it "resistors has numbers 64 output is ['blue', 'yellow']" do
-      expect(resistor.value(['blue','yellow'])).to eq(64)
+  RSpec.describe Tools::Resistors do
+  it '' do
+    resistor = Tools::Resistors.new(['brown','white'])
+    expect(resistor.base).to eq(19)
   end
 
-  it "resistors has number 15 output is ['brown','green',';violet']" do
-      expect(resistor.value(['brown','green','violet'])).to eq(15)
+  it '' do
+    resistor = Tools::Resistors.new(['green', 'blue'])
+    expect(resistor.base).to eq(56)
+  end
+
+  it '' do
+    resistor = Tools::Resistors.new(['gray', 'orange'])
+    expect(resistor.base).to eq(83)
+  end
+
+  it '' do
+    resistor = Tools::Resistors.new(['black', 'yellow', 'red', 'white'])
+    expected = '400 ohms +/- 10%'
+    expect(resistor.specification).to eq expected
+  end
+
+  it '' do
+    resistor = Tools::Resistors.new(['blue', 'white', 'violet', 'orange'])
+    expected = '690000000 ohms +/- 0.2%'
+    expect(resistor.specification).to eq expected
   end
 end

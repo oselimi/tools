@@ -47,22 +47,147 @@ module Tools
   class Resistors
 
     COLORS = {
-     'black' => '0',
-     'brown' => '1',
-     'red' => '2',
-     'orange' => '3',
-     'yellow' => '4',
-     'green' => '5',
-     'blue' => '6',
-     'violet' => '7',
-     'gray' => '8',
-     'white' => '9'
-    }.freeze
+      black: {
+        color: 0,
+        multiplier: 1,
+        tolerance: 20
+      },
+      brown: {
+        color: 1,
+        multiplier: 10,
+        tolerance: 1
+      },
+      red: {
+        color: 2,
+        multiplier: 100,
+        tolerance: 2
+      },
+      orange: {
+        color: 3,
+        multiplier: 1000,
+        tolerance: 0.2
+      },
+      yellow: {
+        color: 4,
+        multiplier: 10_000,
+        tolerance: 0.05
+      },
+      green: {
+        color: 5,
+        multiplier: 100_000,
+        tolerance: 0.5
+      },
+      blue: {
+        color: 6,
+        multiplier: 1_000_000,
+        tolerance: 0.25
+      },
+      violet: {
+        color: 7,
+        multiplier: 10_000_000,
+        tolerance: 0.10
+      },
+      gray: {
+        color: 8,
+        multiplier: 100_000_000,
+        tolerance: 0.05
+      },
+      white: {
+        color: 9,
+        multiplier: 1_000_000_000,
+        tolerance: 10
+      },
+      gold: {
+        multiplier: 0.1,
+        tolerance: 5
+      },
+      silver: {
+        multiplier: 0.01,
+        tolerance: 10
+      }
+   }.freeze
 
-    def self.value(color_bands)
-      color1 = COLORS[color_bands[0]]
-      color2 = COLORS[color_bands[1]]
-      [color1, color2].join.to_i
+    def initialize(colors)
+      @color1, @color2, @multiplier, @tolerance = colors
+    end
+
+    def base
+      color(@color1) * 10 + color(@color2)
+    end
+
+    def specification
+      "#{base * multiplier} ohms +/- #{tolerance}%"
+    end
+
+    private
+
+    def multiplier
+      COLORS[@multiplier.downcase.to_sym][:multiplier]
+    end
+
+    def tolerance
+      @tolerance.nil? ? 20 : COLORS[@tolerance.downcase.to_sym][:tolerance]
+    end
+
+    def color(color_key)
+      COLORS[color_key.downcase.to_sym][:color]
+    end
+  end
+
+  class Armstrong
+
+    def initialize(number)
+      @number = number
+    end
+
+    def valid?
+      sum == number
+    end
+
+    private
+
+    def sum
+      digits.sum {|digit| digit**size}
+    end
+
+    def number
+      @number.abs
+    end
+
+    def digits
+      number.digits
+    end
+
+    def size
+      digits.size
+    end
+  end
+
+  class Antipodes
+    def initialize (num)
+      @num = num
+    end
+
+    def adntipodes_average
+      divide
+    end
+
+    private
+
+    def two_parts
+      @arr = @num.length / 2
+    end
+
+    def left
+      @num.first(two_parts)
+    end
+
+    def right
+      @num.last(two_parts).reverse
+    end
+
+    def divide
+      (0..(two_parts-1)).map {|elem| (left[elem] + right[elem]) / 2.0}
     end
   end
 end
