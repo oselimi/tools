@@ -164,7 +164,7 @@ module Tools
   end
 
   class Antipodes
-    def initialize (num)
+    def initialize(num)
       @num = num
     end
 
@@ -175,7 +175,7 @@ module Tools
     private
 
     def two_parts
-      @arr = @num.length / 2
+      @num.length / 2
     end
 
     def left
@@ -187,7 +187,44 @@ module Tools
     end
 
     def divide
-      (0..(two_parts-1)).map {|elem| (left[elem] + right[elem]) / 2.0}
+      (0..(two_parts - 1)).map { |elem| (left[elem] + right[elem]) / 2.0 }
+    end
+  end
+
+  class Choco
+    def initialize(person1, person2)
+      @person1 = person1
+      @person2 = person2
+    end
+
+    def valid?
+      person_1 == person_2
+    end
+
+    private
+
+    def sum_array_1
+      @person1.map {|elem1, elem2| elem1 * elem2 }
+    end
+
+    def total_1
+      sum_array_1.sum {|elem| elem }
+    end
+
+    def person_1
+      total_1
+    end
+
+    def sum_array_2
+      @person2.map {|elem1, elem2| elem1 * elem2 }
+    end
+
+    def total_2
+      sum_array_2.sum {|elem| elem }
+    end
+
+    def person_2
+      total_2
     end
   end
 end
