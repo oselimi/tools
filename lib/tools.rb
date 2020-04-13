@@ -197,7 +197,7 @@ module Tools
       @person2 = person2
     end
 
-    def valid?
+    def fairness?
       person_1 == person_2
     end
 
@@ -225,6 +225,38 @@ module Tools
 
     def person_2
       total_2
+    end
+  end
+
+  class Odd_number
+    def initialize(arr)
+      @arr = arr
+    end
+
+    def oddnum
+      first_int
+    end
+
+    def oddnum_2
+      second_method
+    end
+
+    private
+
+    def arr_sort
+      @arr.sort
+    end
+
+    def opr_to_arr
+      arr_sort.group_by{|a| a}.select{|k, v| (v.count % 2.0 !=0)}
+    end
+
+    def second_method
+      opr_to_arr.map {|k,v| p k}
+    end
+
+    def first_int
+      opr_to_arr.map {|k,v| p k}.first
     end
   end
 end
