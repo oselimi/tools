@@ -198,37 +198,21 @@ module Tools
     end
 
     def fairness?
-      person_1 == person_2
+      sum_array_1 == sum_array_2
     end
 
     private
 
     def sum_array_1
-      @person1.map {|elem1, elem2| elem1 * elem2 }
-    end
-
-    def total_1
-      sum_array_1.sum {|elem| elem }
-    end
-
-    def person_1
-      total_1
+      @person1.map {|elem1, elem2| elem1 * elem2 }.sum
     end
 
     def sum_array_2
-      @person2.map {|elem1, elem2| elem1 * elem2 }
-    end
-
-    def total_2
-      sum_array_2.sum {|elem| elem }
-    end
-
-    def person_2
-      total_2
+      @person2.map {|elem1, elem2| elem1 * elem2 }.sum
     end
   end
 
-  class Odd_number
+  class Oddnumber
     def initialize(arr)
       @arr = arr
     end
@@ -248,15 +232,15 @@ module Tools
     end
 
     def opr_to_arr
-      arr_sort.group_by{|a| a}.select{|k, v| (v.count % 2.0 !=0)}
+      arr_sort.group_by{ |a| a }.select{ |k, v| v.size.odd? }
     end
 
     def second_method
-      opr_to_arr.map {|k,v| p k}
+      opr_to_arr.map { |k, v| p k }
     end
 
     def first_int
-      opr_to_arr.map {|k,v| p k}.first
+      second_method.first
     end
   end
 end
